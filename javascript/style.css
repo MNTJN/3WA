@@ -1,0 +1,49 @@
+/* ###### GLOBAL ###### */
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Mono', monospace, sans-serif;
+}
+.container{
+    padding: 0 30px;
+}
+
+/* ###### HEADER ###### */
+h1{
+    font-size: 24px;
+    margin: 15px 0;
+    text-align: center;
+}
+.menu-icon-container{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.menu-icon-container .fa-cog{
+    color: rgba(0 , 0, 0, 0.3);
+    transition: 3s ease-in-out;
+}
+.menu-icon-container .fa-cog:hover{
+    color: rgba(0 , 0, 0, 1);
+    transform: rotate(360deg);
+}
+
+/* ###### MAIN ###### */
+.options-panel{
+    width: 80%;
+    height: auto;
+    padding: 15px 30px;
+    background-color: grey;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}
+.options-panel-icon-container{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+/* ###### FOOTER ###### */
