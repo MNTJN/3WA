@@ -44,9 +44,15 @@ let f_resetOptions = () => {
     pageTitle.style.fontSize = '24px';
     pageTitle.style.color = '#000';
     body.style.backgroundColor = '#fff';
-};
-/* ###### Event listeners ###### */
 
+    //reset the inputs' values
+    newPageTitleInput.value = '';
+    newPageTitleColorInput.value = '#000';
+    newPageBackgroundColorInput.value = '#000';
+    pageTitleSize.value = '24';
+};
+
+/* ###### Event listeners ###### */
 changePageTitleButton.addEventListener('click', f_changePageTitle);
 openSettingsButton.addEventListener('click', f_showOptionsPanel);
 closeSettingsButton.addEventListener('click', f_hideOptionsPanel);
