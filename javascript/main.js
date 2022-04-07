@@ -2,61 +2,150 @@
 
 /* ###### DOM Elements ###### */
 const body = document.querySelector('body');
-const openSettingsButton = document.querySelector('.open-settings-button');
-const closeSettingsButton = document.querySelector('.close-settings-button');
-const pageTitle = document.querySelector('h1');
-const newPageTitleInput = document.querySelector('.new-page-title-input');
-const changePageTitleButton = document.querySelector('.page-title-change-btn');
-const optionsPanel = document.querySelector('.options-panel');
-const newPageTitleColorInput = document.querySelector('.new-page-title-color-input');
-const newPageBackgroundColorInput = document.querySelector('.new-page-background-color-input');
-const pageTitleSize = document.querySelector('.page-title-size');
-const resetOptionsButton = document.querySelector('.reset-options-button');
+const pageTitle = document.querySelector('.page-title');
+const pageSettingsPanel = document.querySelector('.page-settings-panel');
+const pageSettingsButton = document.querySelector('.page-settings-panel-button');
+const articleSettingsPanel = document.querySelector('.article-settings-panel');
+const articlesSection = document.querySelector('.articles-section');
+const deleteArticleButton = document.querySelector('.delete-article-button');
 
 /* ###### Functions ###### */
-let f_changePageTitle = () => {
-    if(newPageTitleInput.value != ''){
-        pageTitle.textContent = newPageTitleInput.value;
-    }
+const f_onSettingsPanelOpen = () => {
+    //reset setting panel's inputs values according to current elements style values
+
+    // *page title input*
+    document.querySelector('.new-page-title-input').value = '';
+
+    // *page title color*
+    document.querySelector('.new-page-title-color-input').value = window.getComputedStyle(pageTitle).color;
+
+    // *page title font size*
+    document.querySelector('.page-title-font-size').value = window.getComputedStyle(pageTitle).fontSize;
+
+    // *page background color*
+    document.querySelector('.new-page-background-color-input').value = window.getComputedStyle(body).color;
 };
-let f_showOptionsPanel = () => {
-    if(optionsPanel.style.display === 'none' || !optionsPanel.style.display){
-        optionsPanel.style.display = 'block';
-    }
-    else{
-        optionsPanel.style.display = 'none';
-    }
+const f_generateArticle = () => {
+    const newArticle = document.createElement('article');
+    newArticle.classList.add('article-item');
+    return newArticle;
 };
-let f_hideOptionsPanel = () => {
-    optionsPanel.style.display = 'none';
+const f_generateArticleSettingsButton = () => {
+    //Generate article settings button (+ container)
+    const articleSettingsPanelButtonContainer = document.createElement('div');
+    articleSettingsPanelButtonContainer.classList.add('article-settings-panel-button-container');
+    const articleSettingsPanelButton = document.createElement('i');
+    articleSettingsPanelButton.classList.add('fas','fa-cog','article-settings-panel-button');
+
+    articleSettingsPanelButtonContainer.appendChild(articleSettingsPanelButton);
+
+    return articleSettingsPanelButtonContainer;
+};
+const f_generateArticleTitle = () => {
+    const articleTitle = document.createElement('h2');
+    articleTitle.textContent = `Titre de l'article`;
+
+    return articleTitle;
+};
+const f_generateArticleTextContent = () => {
+    const articleTextContent = document.createElement('p');
+    articleTextContent.textContent = 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. In totam cum amet debitis quia voluptates fugit quis molestiae error ut quod quam, vitae distinctio dicta quidem maxime eveniet sint quaerat! Modi ea natus, et adipisci delectus voluptas, minima laudantium non quos rem assumenda atque cumque suscipit at aliquam excepturi unde, odio optio. Atque dicta, ducimus veritatis soluta, perspiciatis dolor facilis nam nisi ipsum nesciunt dignissimos sequi molestias itaque? Perferendis sunt fugiat aliquam consectetur repudiandae, voluptatibus esse, deserunt quam natus qui nam?';
+
+    return articleTextContent;
+};
+const f_addArticle = () => {
+
+    const newArticle = f_generateArticle();
+    const articleSettingsPanelButtonContainer = f_generateArticleSettingsButton();
+    const articleTitle = f_generateArticleTitle();
+    const articleTextContent = f_generateArticleTextContent();
+
+    //append elements
+    newArticle.appendChild(articleSettingsPanelButtonContainer);
+    newArticle.appendChild(articleTitle);
+    newArticle.appendChild(articleTextContent);
+    articlesSection.appendChild(newArticle);
+};
+const f_togglePageSettingsPanel = () => {
+    pageSettingsPanel.classList.toggle('show');
+    pageSettingsPanel.classList.toggle('hide');
+};
+const f_changePageTitle = () => {
+    if(document.querySelector('.new-page-title-input').value !== ''){
+        pageTitle.textContent = document.querySelector('.new-page-title-input').value;
+    }
 }
-let f_changePageTitleColor = () => {
-    pageTitle.style.color = newPageTitleColorInput.value;
+const f_changePageTitleFontSize = () => {
+    pageTitle.style.fontSize = `${document.querySelector('.page-title-font-size').value}px`;
 };
-let f_changePageBackgroundColor = () => {
-    body.style.backgroundColor = newPageBackgroundColorInput.value;
+const f_changePageTitleColor = () => {
+    pageTitle.style.color = document.querySelector('.new-page-title-color-input').value;
 };
-let f_changePageTitleSize = () => {
-    pageTitle.style.fontSize = `${pageTitleSize.value}px`;
+const f_changePageBackgroundColor = () => {
+    body.style.backgroundColor = document.querySelector('.new-page-background-color-input').value;
 };
-let f_resetOptions = () => {
-    pageTitle.textContent = 'Mon projet JS';
+const f_resetPageSettings = () => {
+    pageTitle.textContent = 'Mon Projet JS';
     pageTitle.style.fontSize = '24px';
     pageTitle.style.color = '#000';
     body.style.backgroundColor = '#fff';
-
-    //reset the inputs' values
-    newPageTitleInput.value = '';
-    newPageTitleColorInput.value = '#000';
-    newPageBackgroundColorInput.value = '#000';
-    pageTitleSize.value = '24';
 };
-
+const f_toggleArticleSettingsPanel = () => {
+    articleSettingsPanel.classList.toggle('show');
+    articleSettingsPanel.classList.toggle('hide');
+};
 /* ###### Event listeners ###### */
-changePageTitleButton.addEventListener('click', f_changePageTitle);
-openSettingsButton.addEventListener('click', f_showOptionsPanel);
-closeSettingsButton.addEventListener('click', f_hideOptionsPanel);
-newPageTitleColorInput.addEventListener('change', f_changePageTitleColor);
-newPageBackgroundColorInput.addEventListener('change', f_changePageBackgroundColor);
-pageTitleSize.addEventListener('change', f_changePageTitleSize);
-resetOptionsButton.addEventListener('click', f_resetOptions);
+document.addEventListener('click', (e) => {
+
+    //Page settings panel open/close buttons
+    if(e.target.classList.contains('page-settings-panel-button') || e.target.classList.contains('page-settings-panel-close-button')){
+        f_onSettingsPanelOpen();
+        f_togglePageSettingsPanel();
+    }
+
+    //Change page title
+    else if(e.target.classList.contains('page-title-change-button')){
+        f_changePageTitle(); 
+    }
+
+    //Add article
+    else if(e.target.classList.contains('add-article-button')){
+        f_addArticle();
+    }
+
+    //Reset page settings
+    else if(e.target.classList.contains('reset-page-settings-button')){
+        f_resetPageSettings();
+        f_onSettingsPanelOpen();
+    }
+
+    //Article settings panel open/close buttons
+    else if(e.target.classList.contains('article-settings-panel-button') || e.target.classList.contains('article-settings-panel-close-button')){
+        f_onSettingsPanelOpen();
+        f_toggleArticleSettingsPanel();
+
+        //Delete article
+        let targetArticle = e.target.parentNode.parentNode;
+        deleteArticleButton.addEventListener('click', ()=> {
+            console.log(targetArticle);
+        });
+        targetArticle = null;
+    }
+});
+document.addEventListener('change', (e) => {
+
+    //Change page title font size
+    if(e.target.classList.contains('page-title-font-size')){
+        f_changePageTitleFontSize();
+    }
+
+    //Change page title font color
+    else if(e.target.classList.contains('new-page-title-color-input')){
+        f_changePageTitleColor(); 
+    }
+
+    //Change page background color
+    else if(e.target.classList.contains('new-page-background-color-input')){
+        f_changePageBackgroundColor(); 
+    }
+});

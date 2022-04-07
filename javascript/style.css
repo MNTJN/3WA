@@ -5,8 +5,24 @@
     margin: 0;
     font-family: 'Roboto Mono', monospace, sans-serif;
 }
-.container{
-    padding: 0 30px;
+header, main,footer{
+    padding: 0 15px;
+}
+i:hover, button, input[type=button]{
+    cursor: pointer;
+}
+button, input[type=button]{
+    padding: 5px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
 }
 
 /* ###### HEADER ###### */
@@ -15,35 +31,59 @@ h1{
     margin: 15px 0;
     text-align: center;
 }
-.menu-icon-container{
+.page-settings-panel-button-container, .article-settings-panel-button-container ,.article-settings-panel-close-button-container{
     position: absolute;
     top: 10px;
     right: 10px;
 }
-.menu-icon-container .fa-cog{
+.page-settings-panel-button, .article-settings-panel-button, .add-article-button{
     color: rgba(0 , 0, 0, 0.3);
     transition: 3s ease-in-out;
 }
-.menu-icon-container .fa-cog:hover{
+.page-settings-panel-button:hover, .article-settings-panel-button:hover{
     color: rgba(0 , 0, 0, 1);
     transform: rotate(360deg);
 }
 
 /* ###### MAIN ###### */
-.options-panel{
+
+.page-settings-panel, .article-settings-panel{
     width: 80%;
     height: auto;
+    max-height: 350px;
+    overflow-y: scroll;
     padding: 15px 30px;
-    background-color: grey;
-    position: absolute;
+    background-color: rgba(100, 100, 100, 1);
+    position: fixed;
     top: 15%;
     left: 50%;
     transform: translateX(-50%);
-    display: none;
+    z-index: 1;
 }
-.options-panel-icon-container{
+.page-settings-panel-close-button-container, .article-settings-panel-close-button-container{
     position: absolute;
     top: 5px;
     right: 10px;
 }
+.page-settings-panel-item-container, .article-settings-panel-item-container{
+    margin: 15px 0;
+}
+.article-settings-panel{
+    z-index: 2;
+}
+.article-settings-panel p{
+    text-decoration: underline;
+    font-weight: 500;
+}
+article{
+    margin-top: 15px;
+    height: auto;
+    max-height: 350px;
+    overflow-y: scroll;
+    position: relative;
+    padding: 15px;
+    border: 1px solid #000;
+    border-radius: 8px;
+}
+
 /* ###### FOOTER ###### */

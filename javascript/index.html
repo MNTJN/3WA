@@ -14,51 +14,91 @@
 </head>
 <body>
     <header>
-        <div class="header-container container">
-            <h1>Mon projet JS</h1>
-            <div class="menu-icon-container">
-                <i class="fas fa-cog open-settings-button"></i>
-            </div>
+        <h1 class="page-title">Mon projet JS</h1>
+        <div class="page-settings-panel-button-container">
+            <i class="fas fa-cog page-settings-panel-button"></i>
         </div>
     </header>
     <main>
-        <div class="main-container container">
-            <h2>Articles</h2>
-            <div class="options-panel">
-                <h3>Options</h3>
-                <div class="options-panel-icon-container">
-                    <i class="fas fa-times close-settings-button"></i>
-                </div>
-                <div class="option-item-container">
-                    <h4>Modifier le titre</h4>
-                    <label for="new-page-title">Nouveau titre :</label>
-                    <input class="new-page-title-input" type="text" name="new-page-title" id="new-page-title">
-                    <input class="page-title-change-btn" type="button" value="OK">
-                </div>
-                <div class="option-item-container">
-                    <h4>Modifier la taille du titre</h4>
-                    <label for="page-title-size">Taille :</label>
-                    <input class="page-title-size" type="range" min="10" max="50" value="24" step="1"  name="page-title-size" id="page-title-size">
-                </div>
-                <div class="option-item-container">
-                    <h4>Modifier la couleur du titre</h4>
-                    <label for="page-title-color">Couleur :</label>
-                    <input class="new-page-title-color-input" type="color" name="page-title-color" id="page-title-color">
-                </div>
-                <div class="option-item-container">
-                    <h4>Modifier la couleur du fond</h4>
-                    <label for="page-background-color">Couleur :</label>
-                    <input class="new-page-background-color-input" type="color" name="page-background-color" id="page-background-color">
-                </div>
-                <div class="option-item-container">
-                    <h4>Réinitialiser les options</h4>
-                    <input class="reset-options-button" type="button" value="Réinitialiser">
-                </div>
+        <h3>Articles <i class="fas fa-plus add-article-button" title="Ajouter un article"></i></i></h3>
+        <!--
+            ###### PAGE SETTINGS PANEL ###### ***START***
+        -->
+        <div class="page-settings-panel hide">
+            <h4>Réglages de la page</h4>
+            <div class="page-settings-panel-close-button-container">
+                <i class="fas fa-times page-settings-panel-close-button"></i>
             </div>
-            <section class="articles-section">
-                
-            </section>
-        </div> 
+            <div class="page-settings-panel-item-container">
+                <p>Modifier le titre</p>
+                <label for="new-page-title">Nouveau titre :</label>
+                <input class="new-page-title-input" type="text" name="new-page-title" id="new-page-title">
+                <input class="page-title-change-button" type="button" value="OK">
+            </div>
+            <div class="page-settings-panel-item-container">
+                <p>Modifier la taille du titre</p>
+                <label for="page-title-font-size">Taille :</label>
+                <input class="page-title-font-size" type="range" min="10" max="50" value="24" step="1"  name="page-title-size" id="page-title-size">
+            </div>
+            <div class="page-settings-panel-item-container">
+                <p>Modifier la couleur du titre</p>
+                <label for="page-title-color">Couleur :</label>
+                <input class="new-page-title-color-input" type="color" name="page-title-color" id="page-title-color">
+            </div>
+            <div class="page-settings-panel-item-container">
+                <p>Modifier la couleur du fond</p>
+                <label for="page-background-color">Couleur :</label>
+                <input class="new-page-background-color-input" type="color" name="page-background-color" id="page-background-color">
+            </div>
+            <div class="page-settings-panel-item-container">
+                <p>Réinitialiser les options</p>
+                <input class="reset-page-settings-button" type="button" value="Réinitialiser">
+            </div>
+        </div>
+        <!--
+            ###### PAGE SETTINGS PANEL ###### ***END***
+        -->
+        <!--
+            ###### ARTICLE SETTINGS PANEL ###### ***START***
+        -->
+        <div class="article-settings-panel hide">
+            <h4>Réglages de l'article</h4>
+            <div class="article-settings-panel-close-button-container">
+                <i class="fas fa-times article-settings-panel-close-button"></i>
+            </div>
+            <div class="article-settings-panel-item-container">
+                <p>Modifier le titre</p>
+                <label for="new-article-title">Nouveau titre :</label>
+                <input class="new-article-title-input" type="text" name="new-article-title" id="new-article-title">
+                <input class="new-article-ok-button" type="button" value="OK">
+            </div>
+            <div class="article-settings-panel-item-container">
+                <p>Modifier le contenu</p>
+                <label for="new-article-text-content">Nouveau contenu :</label>
+                <textarea class="new-article-text-content-input" cols="50" rows="7" name="new-article-text-content" id="new-article-text-content"></textarea>
+                <input class="new-article-ok-button" type="button" value="OK">
+            </div>
+            <div class="article-settings-panel-item-container">
+                <p>Modifier la couleur du titre</p>
+                <label for="article-title-color">Couleur :</label>
+                <input class="new-article-title-color-input" type="color" name="article-title-color" id="article-title-color">
+            </div>
+            <div class="article-settings-panel-item-container">
+                <p>Modifier la couleur du fond</p>
+                <label for="article-background-color">Couleur :</label>
+                <input class="new-article-background-color-input" type="color" name="article-background-color" id="article-background-color">
+            </div>
+            <div class="article-settings-panel-item-container">
+                <p>Supprimer l'article</p>
+                <input class="delete-article-button" type="button" value="Supprimer">
+            </div>
+        </div>
+        <!--
+            ###### ARTICLE SETTINGS PANEL ###### ***END***
+        -->
+        <section class="articles-section">
+            
+        </section> 
     </main>
     <footer>
         <div class="footer-container container">
