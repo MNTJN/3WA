@@ -94,9 +94,9 @@ const f_toggleArticleSettingsPanel = () => {
     articleSettingsPanel.classList.toggle('show');
     articleSettingsPanel.classList.toggle('hide');
 };
+
 /* ###### Event listeners ###### */
 document.addEventListener('click', (e) => {
-
     //Page settings panel open/close buttons
     if(e.target.classList.contains('page-settings-panel-button') || e.target.classList.contains('page-settings-panel-close-button')){
         f_onSettingsPanelOpen();
@@ -121,15 +121,18 @@ document.addEventListener('click', (e) => {
 
     //Article settings panel open/close buttons
     else if(e.target.classList.contains('article-settings-panel-button') || e.target.classList.contains('article-settings-panel-close-button')){
-        f_onSettingsPanelOpen();
-        f_toggleArticleSettingsPanel();
 
-        //Delete article
-        let targetArticle = e.target.parentNode.parentNode;
-        deleteArticleButton.addEventListener('click', ()=> {
-            console.log(targetArticle);
-        });
-        targetArticle = null;
+        if(e.target.classList.contains('article-settings-panel-button')){
+            //Delete article
+            let targetArticle = e.target.parentNode.parentNode;
+            deleteArticleButton.addEventListener('click', ()=> {
+                targetArticle.remove();
+                e.stopPropagation();
+                targetArticle = null;
+            });
+        }
+        f_onSettingsPanelOpen();
+        f_toggleArticleSettingsPanel(); 
     }
 });
 document.addEventListener('change', (e) => {
