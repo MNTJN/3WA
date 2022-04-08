@@ -8,6 +8,7 @@ const pageSettingsButton = document.querySelector('.page-settings-panel-button')
 const articleSettingsPanel = document.querySelector('.article-settings-panel');
 const articlesSection = document.querySelector('.articles-section');
 const deleteArticleButton = document.querySelector('.delete-article-button');
+let articleSelectionne = null;
 
 /* ###### Functions ###### */
 const f_onSettingsPanelOpen = () => {
@@ -65,6 +66,13 @@ const f_addArticle = () => {
     newArticle.appendChild(articleTitle);
     newArticle.appendChild(articleTextContent);
     articlesSection.appendChild(newArticle);
+
+    //Set ID to article
+    let numberOfArticles = 0;
+    if(document.querySelector('.article-item')){
+        numberOfArticles = document.querySelectorAll('.article-item').length;
+    }
+    newArticle.setAttribute('id', numberOfArticles);
 };
 const f_togglePageSettingsPanel = () => {
     pageSettingsPanel.classList.toggle('show');
@@ -94,61 +102,68 @@ const f_toggleArticleSettingsPanel = () => {
     articleSettingsPanel.classList.toggle('show');
     articleSettingsPanel.classList.toggle('hide');
 };
-
+const f_deleteArticle = e => {
+    e.preventDefault();
+    articleSelectionne.remove();
+    f_toggleArticleSettingsPanel();
+};
 /* ###### Event listeners ###### */
-document.addEventListener('click', (e) => {
+document.addEventListener('click', e => {
+    const targetClassList = e.target.classList;
+
     //Page settings panel open/close buttons
-    if(e.target.classList.contains('page-settings-panel-button') || e.target.classList.contains('page-settings-panel-close-button')){
+    if(targetClassList.contains('page-settings-panel-button') || targetClassList.contains('page-settings-panel-close-button')){
         f_onSettingsPanelOpen();
         f_togglePageSettingsPanel();
     }
 
     //Change page title
-    else if(e.target.classList.contains('page-title-change-button')){
+    else if(targetClassList.contains('page-title-change-button')){
         f_changePageTitle(); 
     }
 
     //Add article
-    else if(e.target.classList.contains('add-article-button')){
+    else if(targetClassList.contains('add-article-button')){
         f_addArticle();
     }
 
     //Reset page settings
-    else if(e.target.classList.contains('reset-page-settings-button')){
+    else if(targetClassList.contains('reset-page-settings-button')){
         f_resetPageSettings();
         f_onSettingsPanelOpen();
     }
 
     //Article settings panel open/close buttons
-    else if(e.target.classList.contains('article-settings-panel-button') || e.target.classList.contains('article-settings-panel-close-button')){
-
-        if(e.target.classList.contains('article-settings-panel-button')){
-            //Delete article
-            let targetArticle = e.target.parentNode.parentNode;
-            deleteArticleButton.addEventListener('click', ()=> {
-                targetArticle.remove();
-                e.stopPropagation();
-                targetArticle = null;
-            });
-        }
+    else if(targetClassList.contains('article-settings-panel-button') || targetClassList.contains('article-settings-panel-close-button')){
+        articleSelectionne = e.target.parentNode.parentNode;
         f_onSettingsPanelOpen();
-        f_toggleArticleSettingsPanel(); 
+        f_toggleArticleSettingsPanel();
     }
 });
-document.addEventListener('change', (e) => {
+document.addEventListener('change', e => {
+    const targetClassList = e.target.classList;
 
     //Change page title font size
-    if(e.target.classList.contains('page-title-font-size')){
+    if(targetClassList.contains('page-title-font-size')){
         f_changePageTitleFontSize();
     }
 
     //Change page title font color
-    else if(e.target.classList.contains('new-page-title-color-input')){
+    else if(targetClassList.contains('new-page-title-color-input')){
         f_changePageTitleColor(); 
     }
 
     //Change page background color
-    else if(e.target.classList.contains('new-page-background-color-input')){
+    else if(targetClassList.contains('new-page-background-color-input')){
         f_changePageBackgroundColor(); 
     }
 });
+
+deleteArticleButton.addEventListener('click', f_deleteArticle);
+
+const test = document.querySelector('#test');
+const clicked = e => {
+    console.log('test button clicked !');
+    test.removeEventListener('click', clicked);
+}
+test.addEventListener('click', clicked);
