@@ -37,8 +37,10 @@ const f_onSettingsPanelOpen = () => {
     document.querySelector('.new-article-text-content-input').value = '';
 
     // *article title color input*
-    if(targetArticle.querySelector('h2')){
-        changeArticleTitleColorButton.value = window.getComputedStyle(targetArticle.querySelector('h2')).color;
+    if(targetArticle){
+        if(targetArticle.querySelector('h2')){
+            changeArticleTitleColorButton.value = window.getComputedStyle(targetArticle.querySelector('h2')).color;
+        }
     }
 
     // *article background color input*
@@ -205,10 +207,3 @@ changeArticleTextContentButton.addEventListener('click', f_changeArticleTextCont
 changeArticleTitleColorButton.addEventListener('change', f_changeArticleTitleColor);
 
 changeArticleBackgroundColorButton.addEventListener('change', f_changeArticleBackgroundColor);
-
-// const test = document.querySelector('#test');
-// const clicked = e => {
-//     console.log('test button clicked !');
-//     test.removeEventListener('click', clicked);
-// }
-// test.addEventListener('click', clicked);
