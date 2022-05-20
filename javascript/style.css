@@ -71,9 +71,21 @@ h1{
 .article-settings-panel{
     z-index: 2;
 }
-.article-settings-panel p{
+.page-settings-panel p, .article-settings-panel p{
     text-decoration: underline;
     font-weight: 500;
+}
+.article-image-container{
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.article-image-container img{
+    width: 500px;
+}
+label{
+    font-size: 14px;
 }
 article{
     margin-top: 15px;

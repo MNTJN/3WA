@@ -12,6 +12,8 @@ const changeArticleTitleButton = document.querySelector('.new-article-title-ok-b
 const changeArticleTextContentButton = document.querySelector('.new-article-text-content-ok-button');
 const changeArticleTitleColorButton = document.querySelector('.new-article-title-color-input');
 const changeArticleBackgroundColorButton = document.querySelector('.new-article-background-color-input');
+const addArticleImageButton = document.querySelector('.new-article-image-link-ok-button');
+const deleteArticleImageButton = document.querySelector('.new-article-image-link-delete-button');
 let targetArticle = null;
 
 /* ###### Functions ###### */
@@ -47,13 +49,14 @@ const f_onSettingsPanelOpen = () => {
     if(targetArticle){
         changeArticleBackgroundColorButton.value = window.getComputedStyle(targetArticle).backgroundColor;
     }
-
 };
+
 const f_generateArticle = () => {
     const newArticle = document.createElement('article');
     newArticle.classList.add('article-item');
     return newArticle;
 };
+
 const f_generateArticleSettingsButton = () => {
     //Generate article settings button (+ container)
     const articleSettingsPanelButtonContainer = document.createElement('div');
@@ -78,7 +81,6 @@ const f_generateArticleTextContent = () => {
     return articleTextContent;
 };
 const f_addArticle = () => {
-
     const newArticle = f_generateArticle();
     const articleSettingsPanelButtonContainer = f_generateArticleSettingsButton();
     const articleTitle = f_generateArticleTitle();
@@ -130,7 +132,6 @@ const f_deleteArticle = () => {
     f_toggleArticleSettingsPanel();
 };
 const f_changeArticleTitle = () => {
-
     if(document.querySelector('.new-article-title-input').value !== ''){
         targetArticle.querySelector('h2').textContent = document.querySelector('.new-article-title-input').value;
     }
@@ -146,6 +147,26 @@ const f_changeArticleTitleColor = () => {
 const f_changeArticleBackgroundColor = () => {
     targetArticle.style.backgroundColor = changeArticleBackgroundColorButton.value;
 };
+const f_addArticleImage = e => {
+    if(targetArticle.querySelector('img')){
+        console.log('image exists');
+        targetArticle.querySelector('img').setAttribute('src', document.querySelector('.new-article-image-url').value);
+    }
+    else{
+        let imgContainer = document.createElement('div');
+        imgContainer.classList.add('article-image-container');
+        let img = document.createElement('img');
+        targetArticle.appendChild(imgContainer);
+        img.setAttribute('src', document.querySelector('.new-article-image-url').value);
+        imgContainer.appendChild(img);
+        console.log('image created');
+    }
+};
+const f_deleteArticleImage = e => {
+    if(targetArticle.querySelector('img')){
+        targetArticle.removeChild(targetArticle.querySelector('.article-image-container'));
+    }
+}
 /* ###### Event listeners ###### */
 document.addEventListener('click', e => {
     const targetClassList = e.target.classList;
@@ -203,6 +224,10 @@ deleteArticleButton.addEventListener('click', f_deleteArticle);
 changeArticleTitleButton.addEventListener('click', f_changeArticleTitle);
 
 changeArticleTextContentButton.addEventListener('click', f_changeArticleTextContent);
+
+addArticleImageButton.addEventListener('click', f_addArticleImage);
+
+deleteArticleImageButton.addEventListener('click', f_deleteArticleImage);
 
 changeArticleTitleColorButton.addEventListener('change', f_changeArticleTitleColor);
 
